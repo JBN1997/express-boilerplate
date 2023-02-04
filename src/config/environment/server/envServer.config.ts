@@ -1,5 +1,6 @@
 import * as dotenv from 'dotenv';
 import { IEnvironmentServerConfig } from '@config/environment/server/envServer.interface';
+import { EEnvironmentServerConfig } from '@config/environment/server/envServer.enum';
 
 class EnvironmentConfigServer {
    public SERVER: IEnvironmentServerConfig;
@@ -8,8 +9,8 @@ class EnvironmentConfigServer {
       dotenv.config();
 
       this.SERVER = <IEnvironmentServerConfig>{
-         PORT: this.getEnvVariable('PORT'),
-         ENV: this.getEnvVariable('NODE_ENV'),
+         PORT: this.getEnvVariable(EEnvironmentServerConfig.PORT),
+         NODE_ENV: this.getEnvVariable(EEnvironmentServerConfig.NODE_ENV),
       };
    }
 
