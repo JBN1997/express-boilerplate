@@ -1,12 +1,13 @@
 import * as dotenv from 'dotenv';
+import { IEnvironmentServerConfig } from '@config/environment/server/envServer.interface';
 
-class EnvironmentConfig {
-   public SERVER;
+class EnvironmentConfigServer {
+   public SERVER: IEnvironmentServerConfig;
 
    constructor() {
       dotenv.config();
 
-      this.SERVER = {
+      this.SERVER = <IEnvironmentServerConfig>{
          PORT: this.getEnvVariable('PORT'),
          ENV: this.getEnvVariable('NODE_ENV'),
       };
@@ -23,4 +24,4 @@ class EnvironmentConfig {
    }
 }
 
-export default new EnvironmentConfig();
+export default new EnvironmentConfigServer();

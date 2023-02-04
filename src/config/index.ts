@@ -1,3 +1,3 @@
-import EnvironmentConfig from '@config/global/env.config';
+import EnvironmentConfigServer from '@config/environment/server/envServer.config';
 
-export { EnvironmentConfig };
+export { EnvironmentConfigServer };
