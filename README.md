@@ -18,6 +18,7 @@ src\
  |--config\         # Environment variables and configuration related things
  |--controllers\    # Route controllers (controller layer)
  |--docs\           # Swagger files
+ |--enums\          # Enums
  |--middlewares\    # Custom express middlewares
  |--models\         # Mongoose models (data layer)
  |--routes\         # Routes
