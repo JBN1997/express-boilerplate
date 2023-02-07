@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import { MethodRequest } from '@enums/methodRequest.enum';
 import { EnvironmentConfigServer } from '@config/index';
-import { EEnvironmentServerConfig } from '@config/environment/server/envServer.enum';
 
 class App {
    private static instance: App;
@@ -24,9 +23,7 @@ class App {
    }
 
    public static getInstance() {
-      const port = parseInt(
-         EnvironmentConfigServer.getEnvVariable(EEnvironmentServerConfig.PORT),
-      );
+      const port = parseInt(EnvironmentConfigServer.SERVER.PORT);
 
       if (this.instance) return this.instance;
 
@@ -37,7 +34,7 @@ class App {
    private initializeMiddlewares() {
       this.app.use(
          cors({
-            origin: process.env.CORS_ORIGIN,
+            origin: EnvironmentConfigServer.SERVER.CORS_ORIGIN,
             methods: [
                MethodRequest.GET,
                MethodRequest.POST,
@@ -59,10 +56,10 @@ class App {
       });
    }
 
-   public listen() {
-      this.app.listen(this.port, () => {
-         console.log(`Server inicializado na porta: ${this.port}`);
-      });
+   private listen() {
+      this.app.listen(this.port, () =>
+         console.log(`Server inicializado na porta: ${this.port}`),
+      );
    }
 }
 
