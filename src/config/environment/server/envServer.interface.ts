@@ -1,4 +1,4 @@
 export interface IEnvironmentServerConfig {
-   PORT: string;
+   PORT: number;
    NODE_ENV: string;
 }
