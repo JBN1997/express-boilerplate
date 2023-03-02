@@ -2,10 +2,9 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import morgan from 'morgan';
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import { MethodRequest } from '@enums/methodRequest.enum';
 import { EnvironmentConfigServer } from '@config/index';
-import { EEnvironmentServerConfig } from '@config/environment/server/envServer.enum';
 
 class App {
    private static instance: App;
@@ -23,10 +22,8 @@ class App {
       this.listen();
    }
 
-   public static getInstance() {
-      const port = parseInt(
-         EnvironmentConfigServer.getEnvVariable(EEnvironmentServerConfig.PORT),
-      );
+   public static getInstance(): App {
+      const port: number = EnvironmentConfigServer.SERVER.PORT;
 
       if (this.instance) return this.instance;
 
@@ -34,7 +31,7 @@ class App {
       return this.instance;
    }
 
-   private initializeMiddlewares() {
+   private initializeMiddlewares(): void {
       this.app.use(
          cors({
             origin: process.env.CORS_ORIGIN,
@@ -53,13 +50,13 @@ class App {
       );
    }
 
-   private initializeRoutes() {
+   private initializeRoutes(): void {
       this.routes.forEach(({ route }) => {
          this.app.use('/' + route);
       });
    }
 
-   public listen() {
+   public listen(): void {
       this.app.listen(this.port, () => {
          console.log(`Server inicializado na porta: ${this.port}`);
       });

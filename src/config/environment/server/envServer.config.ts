@@ -1,17 +1,22 @@
-import * as dotenv from 'dotenv';
+import { ObjectSchema } from 'yup';
 import { IEnvironmentServerConfig } from '@config/environment/server/envServer.interface';
 import { EEnvironmentServerConfig } from '@config/environment/server/envServer.enum';
+import EnvironmentConfig from '@config/environment/envConfig';
+import environmentServerConfigSchema from '@config/environment/server/envServer.schema';
 
-class EnvironmentConfigServer {
+class EnvironmentConfigServer extends EnvironmentConfig<IEnvironmentServerConfig> {
+   protected schema: ObjectSchema<IEnvironmentServerConfig>;
    public SERVER: IEnvironmentServerConfig;
 
    constructor() {
-      dotenv.config();
+      super();
 
       this.SERVER = <IEnvironmentServerConfig>{
-         PORT: this.getEnvVariable(EEnvironmentServerConfig.PORT),
+         PORT: parseInt(this.getEnvVariable(EEnvironmentServerConfig.PORT)),
          NODE_ENV: this.getEnvVariable(EEnvironmentServerConfig.NODE_ENV),
       };
+      this.schema = environmentServerConfigSchema;
+      this.validateEnvObject(this.SERVER);
    }
 
    public getEnvVariable(name: string, fallback: string = ''): string {
