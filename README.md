@@ -1,4 +1,4 @@
-# nodejs-server-boilerplate
+# Express Boilerplate
 Production-ready Express and Websocket Node.js server installed and fully configured with built-in features.
 
 ## commands
@@ -7,6 +7,12 @@ Running locally:
 
 ```bash
 npm run start:dev
+```
+
+Formating prettier:
+
+```bash
+npm run format:prettier
 ```
 
 ## structure
@@ -20,13 +26,13 @@ src\
  |--docs\           # Swagger files
  |--enums\          # Enums
  |--middlewares\    # Custom express middlewares
- |--models\         # Mongoose models (data layer)
+ |--models\         # Models (data layer)
  |--routes\         # Routes
  |--services\       # Business logic (service layer)
  |--utils\          # Utility classes and functions
  |--validations\    # Request data validation schemas
- |--app.js          # Express app
- |--index.js        # App entry point
+ |--app.ts          # Express app
+ |--index.ts        # App entry point
 ```
 
 ### environment variables
@@ -61,7 +67,7 @@ router.post('/users', auth('manageUsers'), userController.createUser);
 
 In the example above, an authenticated user can access this route only if that user has the `manageUsers` permission.
 
-The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.js` file.
+The permissions are role-based. You can view the permissions/rights of each role in the `src/config/roles.ts` file.
 
 If the user making the request does not have the required permissions to access this route, a Forbidden (403) error is thrown.
 
